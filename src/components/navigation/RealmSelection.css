@@ -150,16 +150,18 @@
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.06em;
-    color: var(--accent, #fbbf24);
+    color: var(--text-accent, #fbbf24);
     padding: 0.4rem 1rem;
-    border: 1px solid var(--accent, rgba(251, 191, 36, 0.3));
+    border: 1px solid var(--text-accent, rgba(251, 191, 36, 0.4));
     border-radius: 20px;
     transition: all 0.3s ease;
 }
 
 .realm-card:hover .realm-card__explore {
-    background: var(--accent, rgba(251, 191, 36, 0.1));
-    box-shadow: 0 0 15px var(--accent, rgba(251, 191, 36, 0.15));
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* --- Glow ring on hover --- */

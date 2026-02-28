@@ -14,6 +14,7 @@ const REALMS = [
         image: pixarImg,
         gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
         accent: '#fbbf24',
+        textAccent: '#38bdf8',
         tag: '🎬 Animated',
     },
     {
@@ -24,6 +25,7 @@ const REALMS = [
         image: princessesImg,
         gradient: 'linear-gradient(135deg, #ec4899, #a855f7)',
         accent: '#f472b6',
+        textAccent: '#fbbf24',
         tag: '✨ Classic',
     },
     {
@@ -34,6 +36,7 @@ const REALMS = [
         image: starwarsImg,
         gradient: 'linear-gradient(135deg, #3b82f6, #1e3a5f)',
         accent: '#38bdf8',
+        textAccent: '#fbbf24',
         tag: '⚔️ Epic',
     },
 ];
@@ -68,7 +71,7 @@ function RealmCard({ realm, index }) {
                 transition: { duration: 0.3, ease: [0.34, 1.56, 0.64, 1] },
             }}
             whileTap={{ scale: 0.97 }}
-            style={{ '--accent': realm.accent }}
+            style={{ '--accent': realm.accent, '--text-accent': realm.textAccent }}
         >
             {/* Card image */}
             <div className="realm-card__image-wrapper">
