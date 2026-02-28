@@ -30,12 +30,12 @@ const STORIES = [
         character: '🦁',
         accentColor: '#f59e0b',
         pages: [
-            { headline: 'CIRCLE OF LIFE', caption: 'A young prince is born on Pride Rock, presented to the animals of the savanna as their future king. The entire kingdom bows before the newest member of the royal family.' },
-            { headline: 'THE ELEPHANT GRAVEYARD', caption: 'Curiosity leads the young prince beyond the borders of the kingdom, into danger. A hyena ambush nearly claims two young lives, saved only by a father\'s fierce protection.' },
-            { headline: 'TRAGEDY IN THE GORGE', caption: 'A stampede of wildebeest thunders through the gorge. The king saves his son but pays the ultimate price. A treacherous uncle watches from the cliff above, his plan complete.' },
-            { headline: 'HAKUNA MATATA', caption: 'Exiled and consumed by guilt, the prince finds unlikely friends in a carefree warthog and meerkat. He grows up far from home, trying to forget who he was meant to be.' },
-            { headline: 'REMEMBER WHO YOU ARE', caption: 'A ghostly figure appears in the stars — a father\'s voice calling through the night. "Remember who you are. You are my son, and the one true king." The exile ends tonight.' },
-            { headline: 'THE BATTLE FOR PRIDE ROCK', caption: 'The rightful king returns to challenge his uncle\'s tyranny. In a blaze of lightning and fire, the truth is revealed, the usurper falls, and the Pride Lands are reborn under their true king.' },
+            { headline: 'CIRCLE OF LIFE', caption: 'A young prince is born on Pride Rock, presented to the animals of the savanna as their future king. The entire kingdom bows before the newest member of the royal family.', image: '/assets/stories/lion king/6lL49SOgBtqiXMs7Y5HWBYH3X9Z.jpg' },
+            { headline: 'THE ELEPHANT GRAVEYARD', caption: 'Curiosity leads the young prince beyond the borders of the kingdom, into danger. A hyena ambush nearly claims two young lives, saved only by a father\'s fierce protection.', image: '/assets/stories/lion king/download' },
+            { headline: 'TRAGEDY IN THE GORGE', caption: 'A stampede of wildebeest thunders through the gorge. The king saves his son but pays the ultimate price. A treacherous uncle watches from the cliff above, his plan complete.', image: '/assets/stories/lion king/l-intro-1646767047.jpg' },
+            { headline: 'HAKUNA MATATA', caption: 'Exiled and consumed by guilt, the prince finds unlikely friends in a carefree warthog and meerkat. He grows up far from home, trying to forget who he was meant to be.', image: '/assets/stories/lion king/6lL49SOgBtqiXMs7Y5HWBYH3X9Z.jpg' },
+            { headline: 'REMEMBER WHO YOU ARE', caption: 'A ghostly figure appears in the stars — a father\'s voice calling through the night. "Remember who you are. You are my son, and the one true king." The exile ends tonight.', image: '/assets/stories/lion king/download' },
+            { headline: 'THE BATTLE FOR PRIDE ROCK', caption: 'The rightful king returns to challenge his uncle\'s tyranny. In a blaze of lightning and fire, the truth is revealed, the usurper falls, and the Pride Lands are reborn under their true king.', image: '/assets/stories/lion king/l-intro-1646767047.jpg' },
         ],
     },
     {
@@ -46,12 +46,12 @@ const STORIES = [
         character: '⚡',
         accentColor: '#a855f7',
         pages: [
-            { headline: 'STOLEN FROM OLYMPUS', caption: 'The son of Zeus is stolen from Mount Olympus by minions of the underworld. A potion meant to make him mortal fails — he retains his divine strength but loses his place among the gods.' },
-            { headline: 'A HERO IN TRAINING', caption: 'A washed-up satyr trainer named Phil reluctantly takes on the young demigod. Through grueling trials and impossible tasks, a clumsy boy transforms into a legendary warrior.' },
-            { headline: 'THE HYDRA FALLS', caption: 'In the arena of Thebes, a seemingly unstoppable Hydra rises — cut one head, two more grow back. But with godlike strength and mortal courage, the beast is defeated. A hero is born.' },
-            { headline: 'DEAL WITH THE DEVIL', caption: 'Hades, Lord of the Dead, plots to overthrow Olympus. His secret weapon: a captivating spy named Megara. But when love enters the equation, even the best-laid plans of gods go awry.' },
-            { headline: 'SACRIFICE OF LOVE', caption: 'When Megara falls, Hercules trades his own immortality to save her soul from the River Styx. It is this selfless act — not strength — that proves his true heroism.' },
-            { headline: 'A GOD AMONG MEN', caption: 'Offered a place among the gods on Olympus, Hercules makes the ultimate choice: to remain mortal, to stay with the one he loves. A true hero\'s strength lies in the heart.' },
+            { headline: 'STOLEN FROM OLYMPUS', caption: 'The son of Zeus is stolen from Mount Olympus by minions of the underworld. A potion meant to make him mortal fails — he retains his divine strength but loses his place among the gods.', image: '/assets/stories/hercules/herclues and zeus.jpg' },
+            { headline: 'A HERO IN TRAINING', caption: 'A washed-up satyr trainer named Phil reluctantly takes on the young demigod. Through grueling trials and impossible tasks, a clumsy boy transforms into a legendary warrior.', image: '/assets/stories/hercules/maxresdefault.jpg' },
+            { headline: 'THE HYDRA FALLS', caption: 'In the arena of Thebes, a seemingly unstoppable Hydra rises — cut one head, two more grow back. But with godlike strength and mortal courage, the beast is defeated. A hero is born.', image: '/assets/stories/hercules/herclues and zeus.jpg' },
+            { headline: 'DEAL WITH THE DEVIL', caption: 'Hades, Lord of the Dead, plots to overthrow Olympus. His secret weapon: a captivating spy named Megara. But when love enters the equation, even the best-laid plans of gods go awry.', image: '/assets/stories/hercules/maxresdefault.jpg' },
+            { headline: 'SACRIFICE OF LOVE', caption: 'When Megara falls, Hercules trades his own immortality to save her soul from the River Styx. It is this selfless act — not strength — that proves his true heroism.', image: '/assets/stories/hercules/herclues and zeus.jpg' },
+            { headline: 'A GOD AMONG MEN', caption: 'Offered a place among the gods on Olympus, Hercules makes the ultimate choice: to remain mortal, to stay with the one he loves. A true hero\'s strength lies in the heart.', image: '/assets/stories/hercules/maxresdefault.jpg' },
         ],
     },
     {
@@ -106,6 +106,11 @@ const NewspaperPage = forwardRef(({ page, pageNum, storyBanner, totalPages }, re
         <div className="np-page__inner">
             <div className="np-page__banner">{storyBanner}</div>
             <div className="np-page__rule" />
+            {page.image && (
+                <div className="np-page__image-wrapper">
+                    <img src={page.image} alt={page.headline} className="np-page__image" />
+                </div>
+            )}
             <h2 className="np-page__headline">{page.headline}</h2>
             <div className="np-page__rule" />
             <p className="np-page__caption">{page.caption}</p>

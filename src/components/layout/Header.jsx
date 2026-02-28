@@ -7,8 +7,7 @@ import './Header.css';
 const NAV_LINKS = [
     { label: 'Realms', to: '/#realms', icon: Castle },
     { label: 'Stories', to: '/stories', icon: Clapperboard },
-    { label: 'Experience', to: '/#experience', icon: Gamepad2 },
-    { label: 'Parks', to: '/#parks', icon: Ticket },
+    { label: 'Parks & Exp', to: '/parks', icon: Ticket },
 ];
 
 export default function Header() {
