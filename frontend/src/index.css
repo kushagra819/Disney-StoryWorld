@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1d4ed8;
+  --color-secondary: #9333ea;
+  --color-dark: #0f172a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  background: var(--color-dark);
+  color: white;
+  min-height: 100vh;
+  /* Hide default cursor to use the MagicCursor! */
+  cursor: none;
+}
+
+/* Base interactive elements need hidden cursor too */
+a, button, input {
+  cursor: none;
+}
