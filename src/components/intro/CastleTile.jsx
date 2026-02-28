@@ -11,9 +11,9 @@ export default function CastleTile() {
         const handleScroll = () => {
             if (!sectionRef.current) return;
             const rect = sectionRef.current.getBoundingClientRect();
-            const windowH = window.innerHeight;
-            // Progress: 0 when section enters viewport, 1 when it leaves
-            const rawProgress = (windowH - rect.top) / (windowH + rect.height);
+            const sectionH = rect.height;
+            // Progress: 0 when section top hits viewport top, 1 when section bottom hits viewport top
+            const rawProgress = -rect.top / sectionH;
             scrollProgressRef.current = Math.max(0, Math.min(rawProgress, 1));
         };
         window.addEventListener('scroll', handleScroll, { passive: true });

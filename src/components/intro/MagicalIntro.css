@@ -75,7 +75,7 @@
 }
 
 .magical-intro__title-disney {
-    font-family: var(--font-display, 'Cinzel', serif);
+    font-family: 'Waltograph', var(--font-display, 'Cinzel', serif);
     font-size: clamp(4rem, 10vw, 9rem);
     font-weight: 900;
     background: linear-gradient(135deg,
