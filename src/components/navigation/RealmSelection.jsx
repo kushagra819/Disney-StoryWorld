@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import princessesImg from '../../assets/realms/princesses.png';
+import pixarImg from '../../assets/realms/pixar_aesthetic.png';
 import './RealmSelection.css';
 
-const PIXAR_IMG = 'https://static.wikia.nocookie.net/pixar/images/d/d0/Pixarlogo.jpg/revision/latest?cb=20100712043022';
+const PIXAR_IMG = pixarImg;
 const STARWARS_IMG = 'https://www.hdwallpapers.in/download/star_wars_4k_hd-HD.jpg';
 
 const REALMS = [
