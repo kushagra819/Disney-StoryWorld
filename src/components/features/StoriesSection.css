@@ -1,297 +1,420 @@
 /* ============================================
-   Stories Section — Storybook Experience
+   Newspaper Stories — Marvel Rivals Aesthetic
    ============================================ */
 
-.stories-section {
+/* --- Color tokens --- */
+:root {
+    --np-paper: #F4E8D0;
+    --np-paper-dark: #E8D5B8;
+    --np-text: #2C2416;
+    --np-red: #C41E3A;
+    --np-red-dark: #A01828;
+    --np-shadow: rgba(0, 0, 0, 0.3);
+    --np-overlay: rgba(20, 15, 10, 0.95);
+}
+
+/* ───────────── Section ───────────── */
+.newspaper-stories {
     position: relative;
-    background: linear-gradient(180deg, #0a0118 0%, #0d0225 50%, #0a0118 100%);
-    padding: 6rem 2rem;
+    min-height: 100vh;
+    background: var(--np-paper);
+    padding: 5rem 2rem;
     overflow: hidden;
-    transition: background 0.6s ease;
 }
 
-.stories-section--cinematic {
-    background: linear-gradient(180deg, #020012 0%, #050118 50%, #020012 100%);
+/* Subtle paper grain texture BG */
+.newspaper-stories__bg {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.01) 2px,
+            rgba(0, 0, 0, 0.01) 4px),
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.008) 3px,
+            rgba(0, 0, 0, 0.008) 6px);
+    pointer-events: none;
 }
 
-/* --- Floating sparkles --- */
-.stories__sparkles {
+/* ───────────── Section Header ───────────── */
+.newspaper-stories__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.newspaper-stories__header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.newspaper-stories__header-banner {
+    display: inline-block;
+    background: linear-gradient(180deg, var(--np-red), var(--np-red-dark));
+    color: #fff;
+    padding: 0.5rem 2rem;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.25em;
+    box-shadow: 0 3px 10px var(--np-shadow);
+    margin-bottom: 1.5rem;
+}
+
+.newspaper-stories__title {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--np-text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.08);
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.newspaper-stories__subtitle {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 1rem;
+    color: rgba(44, 36, 22, 0.6);
+    font-style: italic;
+}
+
+.newspaper-stories__header-rule {
+    width: 60%;
+    max-width: 400px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--np-text), transparent);
+    margin: 1.5rem auto 0;
+    opacity: 0.2;
+}
+
+/* ───────────── Card Grid ───────────── */
+.newspaper-stories__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .newspaper-stories__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .newspaper-stories__grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        margin: 0 auto;
+    }
+}
+
+/* ───────────── Newspaper Card ───────────── */
+.np-card {
+    position: relative;
+    background: var(--np-paper);
+    border: 1px solid rgba(44, 36, 22, 0.15);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        inset 0 0 40px rgba(0, 0, 0, 0.04);
+}
+
+.np-card:hover {
+    box-shadow:
+        0 12px 40px rgba(196, 30, 58, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.04);
+}
+
+/* Red banner */
+.np-card__banner {
+    background: linear-gradient(180deg, var(--np-red), var(--np-red-dark));
+    color: #fff;
+    padding: 0.45rem 1rem;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.np-card__body {
+    padding: 1rem 1.2rem 1.2rem;
+    text-align: center;
+}
+
+.np-card__rule {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 5%, var(--np-text) 50%, transparent 95%);
+    opacity: 0.25;
+    margin: 0.5rem 0;
+}
+
+.np-card__headline {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--np-text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.06);
+    line-height: 1.1;
+}
+
+.np-card__character {
+    font-size: 3.2rem;
+    margin: 0.8rem 0;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+.np-card__subtitle {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 0.78rem;
+    color: rgba(44, 36, 22, 0.7);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.np-card__read {
+    display: inline-block;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--np-red);
+    transition: color 0.2s;
+}
+
+.np-card:hover .np-card__read {
+    color: var(--np-red-dark);
+    text-decoration: underline;
+}
+
+/* Distressed overlay */
+.np-card__distress {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 10% 90%, rgba(139, 119, 80, 0.08), transparent 60%),
+        radial-gradient(ellipse at 90% 10%, rgba(139, 119, 80, 0.06), transparent 50%);
+}
+
+/* ═══════════════════════════════════
+   READER MODAL
+   ═══════════════════════════════════ */
+
+.np-reader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.np-reader__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--np-overlay);
+    cursor: pointer;
+}
+
+.np-reader__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    width: 90vw;
+    max-width: 520px;
+}
+
+/* Close button */
+.np-reader__close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: none;
+    border: none;
+    color: rgba(244, 232, 208, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.np-reader__close:hover {
+    color: var(--np-red);
+    transform: scale(1.15);
+}
+
+/* Page counter */
+.np-reader__counter {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: rgba(244, 232, 208, 0.5);
+    letter-spacing: 0.1em;
+}
+
+/* Book wrapper */
+.np-reader__book {
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-height: 65vh;
+}
+
+/* react-pageflip override */
+.np-flipbook {
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ───────────── Single Page ───────────── */
+.np-page {
+    position: relative;
+    background: var(--np-paper);
+    overflow: hidden;
+}
+
+.np-page__inner {
+    position: relative;
+    z-index: 1;
+    padding: 1.8rem 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Page paper texture */
+.np-page__texture {
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 0;
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(139, 119, 80, 0.06), transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(139, 119, 80, 0.04), transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(200, 180, 140, 0.03), transparent 70%);
+    /* Inner shadow for depth */
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.06);
 }
 
-.stories__sparkle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(251, 191, 36, 0.6);
-    animation: sparkle-float ease-in-out infinite alternate;
-}
-
-.stories__sparkles--cinematic .stories__sparkle {
-    background: rgba(251, 191, 36, 0.9);
-    box-shadow: 0 0 6px rgba(251, 191, 36, 0.5);
-}
-
-@keyframes sparkle-float {
-    0% {
-        opacity: 0.15;
-        transform: translateY(0) scale(0.8);
-    }
-
-    100% {
-        opacity: 0.8;
-        transform: translateY(-20px) scale(1.3);
-    }
-}
-
-/* --- Carousel layout --- */
-.stories__carousel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-}
-
-/* --- Arrow buttons --- */
-.stories__arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid rgba(124, 58, 237, 0.2);
-    background: rgba(26, 5, 51, 0.5);
-    color: var(--ds-enchanted-violet, #a78bfa);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.stories__arrow:hover {
-    background: rgba(124, 58, 237, 0.15);
-    border-color: rgba(124, 58, 237, 0.4);
+/* Page banner */
+.np-page__banner {
+    background: linear-gradient(180deg, var(--np-red), var(--np-red-dark));
     color: #fff;
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
-}
-
-/* --- Card wrapper (needed for AnimatePresence) --- */
-.stories__card-wrapper {
-    flex: 1;
-    min-height: 480px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* --- Story card --- */
-.stories__card {
-    position: absolute;
-    inset: 0;
-    border-radius: 0;
-    overflow: hidden;
-    background: rgba(26, 5, 51, 0.4);
-    border: 1px solid rgba(124, 58, 237, 0.12);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: box-shadow 0.5s ease;
-}
-
-.stories__card--cinematic {
-    box-shadow:
-        0 0 60px rgba(124, 58, 237, 0.15),
-        0 0 120px rgba(251, 191, 36, 0.05);
-}
-
-/* --- Card hero --- */
-.stories__card-hero {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: transform 0.5s ease;
-}
-
-.stories__card--cinematic .stories__card-hero {
-    transform: scale(1.04);
-}
-
-.stories__card-emoji {
-    font-size: 5rem;
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
-    animation: emoji-float 4s ease-in-out infinite;
-}
-
-@keyframes emoji-float {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-8px) scale(1.05);
-    }
-}
-
-/* --- Card content --- */
-.stories__card-content {
-    padding: 1.75rem 2rem 2rem;
-}
-
-.stories__card-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-
-.stories__card-year {
-    font-family: var(--font-display, 'Cinzel', serif);
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--ds-enchanted-gold, #fbbf24);
-    letter-spacing: 0.06em;
-}
-
-.stories__card-tag {
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: rgba(167, 139, 250, 0.9);
-    background: rgba(124, 58, 237, 0.12);
-    border: 1px solid rgba(124, 58, 237, 0.2);
-}
-
-.stories__card-title {
-    font-family: 'Waltograph', var(--font-display, 'Cinzel', serif);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--ds-white, #fff);
+    padding: 0.35rem 1rem;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-align: center;
     margin-bottom: 1rem;
-    line-height: 1.2;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.stories__card-lines {
+.np-page__rule {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 2%, var(--np-text) 50%, transparent 98%);
+    opacity: 0.2;
+    margin: 0.6rem 0;
+}
+
+.np-page__headline {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 900;
+    color: var(--np-text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    line-height: 1.1;
+}
+
+.np-page__caption {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 0.85rem;
+    color: rgba(44, 36, 22, 0.85);
+    line-height: 1.75;
+    text-align: justify;
+    flex: 1;
+    margin-top: 0.5rem;
+    column-count: 1;
+}
+
+.np-page__footer {
+    text-align: center;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.np-page__num {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: rgba(44, 36, 22, 0.35);
+    letter-spacing: 0.15em;
+}
+
+/* ───────────── Navigation Arrows ───────────── */
+.np-reader__nav {
     display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+    gap: 1.5rem;
 }
 
-.stories__card-line {
-    font-family: var(--font-script, 'Dancing Script', cursive);
-    font-size: 1.05rem;
-    color: rgba(248, 248, 255, 0.65);
-    line-height: 1.6;
-    font-style: italic;
-}
-
-/* --- Controls (dots + cinematic) --- */
-.stories__controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    position: relative;
-    z-index: 2;
-}
-
-.stories__dots {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.stories__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.stories__dot--active {
-    background: var(--ds-enchanted-gold, #fbbf24);
-    border-color: var(--ds-enchanted-gold, #fbbf24);
-    box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
-    transform: scale(1.2);
-}
-
-.stories__dot:hover:not(.stories__dot--active) {
-    background: rgba(124, 58, 237, 0.3);
-}
-
-/* Cinematic mode button */
-.stories__cinematic-btn {
+.np-reader__arrow {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.4rem 0.9rem;
-    border-radius: 20px;
-    border: 1px solid rgba(124, 58, 237, 0.2);
-    background: rgba(26, 5, 51, 0.3);
-    color: rgba(167, 139, 250, 0.6);
-    font-family: var(--font-body, 'Quicksand', sans-serif);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    padding: 0.5rem 1.2rem;
+    background: linear-gradient(180deg, var(--np-red), var(--np-red-dark));
+    color: #fff;
+    border: none;
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.stories__cinematic-btn:hover {
-    border-color: rgba(124, 58, 237, 0.4);
-    color: rgba(167, 139, 250, 0.9);
+.np-reader__arrow:hover:not(:disabled) {
+    background: linear-gradient(180deg, #d4283e, var(--np-red));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(196, 30, 58, 0.3);
 }
 
-.stories__cinematic-btn--active {
-    background: rgba(251, 191, 36, 0.1);
-    border-color: rgba(251, 191, 36, 0.3);
-    color: var(--ds-enchanted-gold, #fbbf24);
-    box-shadow: 0 0 12px rgba(251, 191, 36, 0.15);
+.np-reader__arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
 }
 
-/* --- Responsive --- */
+/* ───────────── Responsive ───────────── */
 @media (max-width: 600px) {
-    .stories-section {
-        padding: 4rem 1rem;
+    .newspaper-stories {
+        padding: 3rem 1rem;
     }
 
-    .stories__carousel {
-        gap: 0.5rem;
+    .np-reader__container {
+        width: 95vw;
     }
 
-    .stories__arrow {
-        width: 36px;
-        height: 36px;
+    .np-page__inner {
+        padding: 1.2rem 1rem;
     }
 
-    .stories__card-wrapper {
-        min-height: 440px;
+    .np-page__headline {
+        font-size: 1.4rem;
     }
 
-    .stories__card-hero {
-        height: 160px;
-    }
-
-    .stories__card-content {
-        padding: 1.25rem 1.5rem 1.5rem;
-    }
-
-    .stories__card-title {
-        font-size: 1.6rem;
+    .np-page__caption {
+        font-size: 0.78rem;
     }
 }
