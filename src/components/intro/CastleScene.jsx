@@ -113,13 +113,16 @@ function ScrollCamera({ scrollProgress }) {
     const t = scrollProgress.current;
     const eased = 1 - Math.pow(1 - t, 3);
 
-    // Camera flies from far (z=35) to close (z=8), slightly above
-    const z = THREE.MathUtils.lerp(35, 8, eased);
-    const y = THREE.MathUtils.lerp(8, 4, eased);
-    const x = Math.sin(eased * Math.PI * 0.2) * 1.5;
+    // Camera starts at ground level, far away, and walks through the castle gate
+    const z = THREE.MathUtils.lerp(25, -2, eased);   // approach → pass through gate
+    const y = THREE.MathUtils.lerp(1.5, 1.5, eased);  // stay at walking height
+    const x = 0;
 
     camera.position.set(x, y, z);
-    camera.lookAt(0, 4, 0);
+    // Look slightly up at the castle, then straight ahead through the gate
+    const lookY = THREE.MathUtils.lerp(5, 2, eased);
+    const lookZ = z - 5; // always look forward
+    camera.lookAt(0, lookY, lookZ);
   });
 
   return null;
@@ -141,7 +144,7 @@ export default function CastleScene({ scrollProgress }) {
     <div className="castle-scene">
       <Canvas
         shadows
-        camera={{ fov: 50, near: 0.1, far: 500, position: [0, 8, 35] }}
+        camera={{ fov: 50, near: 0.1, far: 500, position: [0, 1.5, 25] }}
         gl={{
           antialias: true,
           toneMapping: THREE.ACESFilmicToneMapping,

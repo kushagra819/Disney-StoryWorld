@@ -1,87 +1,68 @@
 /* ============================================
-   MagicalIntro — 3D Castle Scroll Approach
+   MagicalIntro — Text Hero (Tile 1)
    ============================================ */
 
 .magical-intro {
     position: relative;
     width: 100%;
-    /* height set inline (300vh) for scroll room */
-    background: #020024;
-}
-
-/* --- Loading overlay --- */
-.magical-intro__loading-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--ds-midnight);
-    z-index: 100;
-    pointer-events: none;
-}
-
-/* --- Sticky container (stays on screen during scroll) --- */
-.magical-intro__sticky {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-/* --- Loader (while GLB loads) --- */
-.magical-intro__loader {
-    position: absolute;
-    inset: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-md, 1rem);
+    background: linear-gradient(180deg, #020024 0%, #0a0118 60%, #0f0225 100%);
+    overflow: hidden;
+}
+
+/* Loading overlay */
+.magical-intro__loading-overlay {
+    position: fixed;
+    inset: 0;
     background: #020024;
-    color: var(--ds-enchanted-violet, #a78bfa);
-    font-family: var(--font-display, 'Cinzel', serif);
-    font-size: 1.2rem;
-    letter-spacing: 0.1em;
-    z-index: 50;
-}
-
-.magical-intro__loader-spinner {
-    width: 48px;
-    height: 48px;
-    border: 3px solid rgba(167, 139, 250, 0.2);
-    border-top-color: var(--ds-enchanted-gold, #fbbf24);
-    border-radius: 50%;
-    animation: rotate-slow 1s linear infinite;
-}
-
-@keyframes rotate-slow {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* --- UI Content overlay on top of 3D --- */
-.magical-intro__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    text-align: center;
-    padding-top: 8vh;
+    z-index: 100;
     pointer-events: none;
 }
 
-.magical-intro__content .btn-magic,
-.magical-intro__content a {
-    pointer-events: all;
+/* --- Background stars --- */
+.magical-intro__stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.magical-intro__star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    animation: twinkle-star ease-in-out infinite alternate;
+}
+
+@keyframes twinkle-star {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* --- Content --- */
+.magical-intro__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 2rem;
 }
 
 .magical-intro__tagline {
     font-family: var(--font-script, 'Dancing Script', cursive);
-    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
     color: var(--ds-enchanted-gold, #fbbf24);
-    margin-bottom: var(--space-sm, 0.5rem);
-    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+    margin-bottom: var(--space-md, 1rem);
+    text-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
 }
 
 .magical-intro__title {
@@ -89,26 +70,22 @@
     flex-direction: column;
     align-items: center;
     gap: 0;
-    margin-bottom: var(--space-md, 1rem);
+    margin-bottom: var(--space-lg, 1.5rem);
     line-height: 1;
 }
 
 .magical-intro__title-disney {
     font-family: var(--font-display, 'Cinzel', serif);
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-size: clamp(4rem, 10vw, 9rem);
     font-weight: 900;
     background: linear-gradient(135deg,
-            #fbbf24 0%,
-            #fff8e1 25%,
-            #fbbf24 50%,
-            #fff8e1 75%,
-            #fbbf24 100%);
+            #fbbf24 0%, #fff8e1 25%, #fbbf24 50%, #fff8e1 75%, #fbbf24 100%);
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shimmer 4s linear infinite;
-    filter: drop-shadow(0 4px 20px rgba(251, 191, 36, 0.3));
+    filter: drop-shadow(0 4px 30px rgba(251, 191, 36, 0.3));
     letter-spacing: 0.08em;
 }
 
@@ -129,13 +106,13 @@
     letter-spacing: 0.5em;
     text-transform: uppercase;
     color: var(--ds-enchanted-violet, #a78bfa);
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
 }
 
 .magical-intro__description {
     max-width: 550px;
-    margin: 0 auto 2rem;
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    margin: 0 auto 2.5rem;
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
     color: rgba(248, 248, 255, 0.6);
     line-height: 1.7;
 }
@@ -145,7 +122,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-md, 1rem);
 }
 
 .magical-intro__cta {
@@ -166,10 +142,10 @@
 
 .magical-intro__cta-sparkle {
     font-size: 0.8em;
-    animation: sparkle-spin 2s ease-in-out infinite;
+    animation: sparkle-rotate 2s ease-in-out infinite;
 }
 
-@keyframes sparkle-spin {
+@keyframes sparkle-rotate {
 
     0%,
     100% {
@@ -194,19 +170,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    animation: fadeInUp 1s ease forwards, float-gentle 3s ease-in-out 1s infinite;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
+    animation: float-gentle 3s ease-in-out infinite;
 }
 
 @keyframes float-gentle {
@@ -264,16 +228,7 @@
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-    .magical-intro__content {
-        padding-top: 5vh;
-    }
-
     .magical-intro__title-story {
         letter-spacing: 0.3em;
-    }
-
-    .magical-intro__description {
-        padding: 0 1rem;
-        font-size: 0.85rem;
     }
 }
