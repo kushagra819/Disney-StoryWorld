@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles, Castle, Clapperboard, Gamepad2, Ticket } from 'lucide-react';
 import './Header.css';
 
 const NAV_LINKS = [
-    { label: 'Realms', href: '#realms', icon: Castle },
-    { label: 'Stories', href: '#stories', icon: Clapperboard },
-    { label: 'Experience', href: '#experience', icon: Gamepad2 },
-    { label: 'Parks', href: '#parks', icon: Ticket },
+    { label: 'Realms', to: '/#realms', icon: Castle },
+    { label: 'Stories', to: '/stories', icon: Clapperboard },
+    { label: 'Experience', to: '/#experience', icon: Gamepad2 },
+    { label: 'Parks', to: '/#parks', icon: Ticket },
 ];
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 60);
@@ -27,6 +29,22 @@ export default function Header() {
         return () => window.removeEventListener('resize', onResize);
     }, []);
 
+    // Scroll to top on route change
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
+    const handleNavClick = (link) => {
+        setMobileOpen(false);
+        // If it's a hash link on the home page, scroll to section
+        if (link.to.startsWith('/#')) {
+            if (location.pathname === '/') {
+                const el = document.getElementById(link.to.replace('/#', ''));
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    };
+
     return (
         <motion.header
             className={`header ${scrolled ? 'header--scrolled' : ''}`}
@@ -36,23 +54,30 @@ export default function Header() {
         >
             <div className="header__inner">
                 {/* Logo */}
-                <a href="#" className="header__logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <Link to="/" className="header__logo">
                     <Sparkles className="header__logo-icon" size={22} />
                     <span className="header__logo-text">
                         <span className="header__logo-disney">Disney</span>
                         <span className="header__logo-story">StoryWorld</span>
                     </span>
-                </a>
+                </Link>
 
                 {/* Desktop Nav */}
                 <nav className="header__nav">
                     {NAV_LINKS.map((link) => {
                         const Icon = link.icon;
+                        const isActive = link.to === location.pathname ||
+                            (link.to.startsWith('/#') && location.pathname === '/');
                         return (
-                            <a key={link.label} href={link.href} className="header__nav-link">
+                            <Link
+                                key={link.label}
+                                to={link.to.startsWith('/#') ? '/' : link.to}
+                                className={`header__nav-link ${link.to === location.pathname ? 'header__nav-link--active' : ''}`}
+                                onClick={() => handleNavClick(link)}
+                            >
                                 <Icon size={16} className="header__nav-icon" />
                                 <span>{link.label}</span>
-                            </a>
+                            </Link>
                         );
                     })}
                 </nav>
@@ -85,18 +110,15 @@ export default function Header() {
                         {NAV_LINKS.map((link, i) => {
                             const Icon = link.icon;
                             return (
-                                <motion.a
+                                <Link
                                     key={link.label}
-                                    href={link.href}
+                                    to={link.to.startsWith('/#') ? '/' : link.to}
                                     className="header__mobile-link"
-                                    onClick={() => setMobileOpen(false)}
-                                    initial={{ x: -30, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: i * 0.08 }}
+                                    onClick={() => handleNavClick(link)}
                                 >
                                     <Icon size={18} />
                                     <span>{link.label}</span>
-                                </motion.a>
+                                </Link>
                             );
                         })}
                         <a href="#" className="header__mobile-cta">

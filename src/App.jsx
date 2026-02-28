@@ -1,22 +1,22 @@
-import MagicalIntro from './components/intro/MagicalIntro'
-import CastleTile from './components/intro/CastleTile'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MagicCursor from './components/ui/MagicCursor'
 import Header from './components/layout/Header'
-import RealmSelection from './components/navigation/RealmSelection'
+import HomePage from './pages/HomePage'
+import StoriesPage from './pages/StoriesPage'
 import './App.css'
 
 function App() {
   return (
-    <div className="app">
-      <MagicCursor />
-      <Header />
-      {/* Tile 1 — Text Hero */}
-      <MagicalIntro />
-      {/* Tile 2 — 3D Castle */}
-      <CastleTile />
-      {/* Tile 3 — Realm Selection */}
-      <RealmSelection />
-    </div>
+    <BrowserRouter>
+      <div className="app">
+        <MagicCursor />
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/stories" element={<StoriesPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 

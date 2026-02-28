@@ -142,6 +142,19 @@
     transform: translateX(-50%) scaleX(1);
 }
 
+.header__nav-link--active {
+    color: var(--ds-enchanted-gold, #fbbf24);
+}
+
+.header__nav-link--active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.header__nav-link--active .header__nav-icon {
+    opacity: 1;
+    color: var(--ds-enchanted-gold, #fbbf24);
+}
+
 .header__nav-icon {
     opacity: 0.6;
     transition: opacity 0.3s ease;
