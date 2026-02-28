@@ -315,7 +315,13 @@ function EpcotDetail() {
                                         title="Epcot Futureworld - Disney World Theme Park - VR"
                                         frameBorder="0"
                                         allowFullScreen
+                                        mozallowfullscreen="true"
+                                        webkitallowfullscreen="true"
                                         allow="autoplay; fullscreen; xr-spatial-tracking"
+                                        xr-spatial-tracking="true"
+                                        execution-while-out-of-viewport="true"
+                                        execution-while-not-rendered="true"
+                                        web-share="true"
                                         src="https://sketchfab.com/models/39025bfd4c6e48daaa3c3544473870b4/embed?autostart=0&ui_theme=dark&preload=1"
                                         style={{ width: '100%', height: '100%', border: 'none' }}
                                     />
@@ -422,7 +428,13 @@ function AnimalKingdomDetail() {
                                         title="Singapore Zoo"
                                         frameBorder="0"
                                         allowFullScreen
+                                        mozallowfullscreen="true"
+                                        webkitallowfullscreen="true"
                                         allow="autoplay; fullscreen; xr-spatial-tracking"
+                                        xr-spatial-tracking="true"
+                                        execution-while-out-of-viewport="true"
+                                        execution-while-not-rendered="true"
+                                        web-share="true"
                                         src="https://sketchfab.com/models/7cf34b58d72d4c8db4eb3abf39aa3d60/embed?autostart=0&ui_theme=dark&preload=1"
                                         style={{ width: '100%', height: '100%', border: 'none' }}
                                     />
