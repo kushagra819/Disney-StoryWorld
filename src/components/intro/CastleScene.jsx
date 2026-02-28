@@ -1,49 +1,54 @@
-import { useRef, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import './CastleScene.css';
 
-/* ── Castle 3D Model (auto-scaled & centered) ──────────── */
+/* ── Castle 3D Model (auto-scaled, centered, front-facing) ── */
 function CastleModel() {
   const { scene } = useGLTF('/models/castle.glb');
-  const ref = useRef();
 
-  // Auto-scale and center the model based on its bounding box
   useMemo(() => {
-    // Compute bounding box of the entire scene
+    // Reset any prior transforms
+    scene.rotation.set(0, 0, 0);
+    scene.scale.set(1, 1, 1);
+    scene.position.set(0, 0, 0);
+
+    // Compute bounding box
     const box = new THREE.Box3().setFromObject(scene);
     const size = new THREE.Vector3();
     const center = new THREE.Vector3();
     box.getSize(size);
     box.getCenter(center);
 
-    // Log for debugging
-    console.log('Castle model bounds:', { size, center, min: box.min, max: box.max });
+    console.log('Castle bounds:', {
+      size: { x: size.x.toFixed(2), y: size.y.toFixed(2), z: size.z.toFixed(2) },
+      center: { x: center.x.toFixed(2), y: center.y.toFixed(2), z: center.z.toFixed(2) },
+    });
 
-    // Determine how big we want the castle — target ~15 units tall
+    // Scale to ~12 units tall
     const maxDim = Math.max(size.x, size.y, size.z);
-    const targetSize = 15;
-    const scaleFactor = targetSize / maxDim;
-
-    // Apply scale to the scene
+    const scaleFactor = 12 / maxDim;
     scene.scale.setScalar(scaleFactor);
 
-    // Re-center: shift so the bottom sits at y=0 and x/z at origin
+    // Center horizontally, place bottom at y=0
     scene.position.set(
       -center.x * scaleFactor,
       -box.min.y * scaleFactor,
       -center.z * scaleFactor
     );
 
-    // Enable shadows on all meshes
+    // Rotate so the front gate faces the camera (+Z direction)
+    // Most Sketchfab models have front at -Z, so rotate 180° around Y
+    scene.rotation.y = Math.PI;
+
+    // Configure materials
     scene.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
-        // Ensure materials are visible
         if (child.material) {
-          child.material.side = THREE.DoubleSide;
+          child.material.side = THREE.FrontSide;
         }
       }
     });
@@ -54,12 +59,11 @@ function CastleModel() {
 
 /* ── Floating sparkle particles ───────────────────────── */
 function MagicParticles({ count = 200 }) {
-  const ref = useRef();
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 50;
-      pos[i * 3 + 1] = Math.random() * 30;
+      pos[i * 3 + 1] = Math.random() * 25;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 50;
     }
     return pos;
@@ -68,10 +72,10 @@ function MagicParticles({ count = 200 }) {
   const colors = useMemo(() => {
     const cols = new Float32Array(count * 3);
     const palette = [
-      [1, 0.75, 0.15],    // gold
-      [0.65, 0.55, 0.98],  // violet
-      [0.96, 0.45, 0.71],  // pink
-      [1, 0.95, 0.78],     // stardust
+      [1, 0.75, 0.15],
+      [0.65, 0.55, 0.98],
+      [0.96, 0.45, 0.71],
+      [1, 0.95, 0.78],
     ];
     for (let i = 0; i < count; i++) {
       const c = palette[Math.floor(Math.random() * palette.length)];
@@ -82,27 +86,17 @@ function MagicParticles({ count = 200 }) {
     return cols;
   }, [count]);
 
-  useFrame((state) => {
-    if (!ref.current) return;
-    const time = state.clock.elapsedTime;
-    const posArray = ref.current.geometry.attributes.position.array;
-    for (let i = 0; i < count; i++) {
-      posArray[i * 3 + 1] += Math.sin(time * 0.5 + i) * 0.005;
-    }
-    ref.current.geometry.attributes.position.needsUpdate = true;
-  });
-
   return (
-    <points ref={ref}>
+    <points>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.2}
+        size={0.18}
         vertexColors
         transparent
-        opacity={0.8}
+        opacity={0.7}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}
@@ -116,88 +110,85 @@ function ScrollCamera({ scrollProgress }) {
   const { camera } = useThree();
 
   useFrame(() => {
-    // Camera: far (z=40, y=10) → close (z=6, y=3)
     const t = scrollProgress.current;
-    const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    const eased = 1 - Math.pow(1 - t, 3);
 
-    const z = THREE.MathUtils.lerp(40, 6, eased);
-    const y = THREE.MathUtils.lerp(10, 4, eased);
-    const x = Math.sin(eased * Math.PI * 0.25) * 2;
+    // Camera flies from far (z=35) to close (z=8), slightly above
+    const z = THREE.MathUtils.lerp(35, 8, eased);
+    const y = THREE.MathUtils.lerp(8, 4, eased);
+    const x = Math.sin(eased * Math.PI * 0.2) * 1.5;
 
     camera.position.set(x, y, z);
-    camera.lookAt(0, 5, 0);
+    camera.lookAt(0, 4, 0);
   });
 
   return null;
 }
 
-/* ── Ground ────────────────────────────────────────────── */
+/* ── Ground plane ──────────────────────────────────────── */
 function Ground() {
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]} receiveShadow>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]} receiveShadow>
       <circleGeometry args={[80, 64]} />
       <meshStandardMaterial color="#0a0118" roughness={0.95} metalness={0.05} />
     </mesh>
   );
 }
 
-/* ── Main scene ────────────────────────────────────────── */
+/* ── Main Scene ────────────────────────────────────────── */
 export default function CastleScene({ scrollProgress }) {
   return (
     <div className="castle-scene">
       <Canvas
         shadows
-        camera={{ fov: 50, near: 0.1, far: 500, position: [0, 10, 40] }}
+        camera={{ fov: 50, near: 0.1, far: 500, position: [0, 8, 35] }}
         gl={{
           antialias: true,
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.8,
+          toneMappingExposure: 1.6,
         }}
       >
-        {/* Background color */}
         <color attach="background" args={['#030030']} />
         <fog attach="fog" args={['#030030', 50, 150]} />
 
-        {/* Ambient fill */}
-        <ambientLight intensity={1} color="#c4b5fd" />
+        {/* Lighting setup */}
+        <ambientLight intensity={0.8} color="#c4b5fd" />
+        <hemisphereLight args={['#87CEEB', '#0a0118', 0.6]} />
 
-        {/* Key light — warm sunlight from upper front-right */}
+        {/* Key light — warm from above-front */}
         <directionalLight
-          position={[15, 25, 20]}
-          intensity={3}
+          position={[10, 20, 15]}
+          intensity={2.5}
           color="#fbbf24"
           castShadow
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
         />
 
-        {/* Front fill — white light so we can see the model */}
-        <directionalLight position={[0, 15, 35]} intensity={2} color="#ffffff" />
+        {/* Front fill — white */}
+        <directionalLight position={[0, 10, 30]} intensity={2} color="#ffffff" />
 
-        {/* Colored accent lights */}
-        <pointLight position={[0, 15, 0]} intensity={5} color="#7c3aed" distance={60} />
-        <pointLight position={[-10, 8, 10]} intensity={3} color="#f472b6" distance={50} />
-        <pointLight position={[10, 8, -10]} intensity={3} color="#38bdf8" distance={50} />
+        {/* Colored accents */}
+        <pointLight position={[0, 12, 0]} intensity={4} color="#7c3aed" distance={50} />
+        <pointLight position={[-8, 5, 8]} intensity={2} color="#f472b6" distance={40} />
+        <pointLight position={[8, 5, -8]} intensity={2} color="#38bdf8" distance={40} />
 
-        {/* Back rim light */}
-        <directionalLight position={[0, 10, -25]} intensity={1.5} color="#a78bfa" />
-
-        {/* Hemisphere light for overall fill */}
-        <hemisphereLight args={['#7c3aed', '#0a0118', 0.8]} />
+        {/* Back rim */}
+        <directionalLight position={[0, 8, -20]} intensity={1} color="#a78bfa" />
 
         {/* Stars */}
         <Stars radius={120} depth={80} count={4000} factor={5} saturation={0.6} fade speed={0.8} />
 
-        {/* Castle */}
+        {/* Castle — static, front-facing */}
         <CastleModel />
 
         {/* Particles */}
-        <MagicParticles count={300} />
+        <MagicParticles count={250} />
 
         {/* Ground */}
         <Ground />
 
-        {/* Camera controller */}
+        {/* Camera */}
         <ScrollCamera scrollProgress={scrollProgress} />
       </Canvas>
     </div>

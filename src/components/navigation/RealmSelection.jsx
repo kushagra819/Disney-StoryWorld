@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import princessesImg from '../../assets/realms/princesses.png';
-import starwarsImg from '/starwars.png';
-import pixarImg from '/pixar.jpg';
 import './RealmSelection.css';
+
+const PIXAR_IMG = 'https://static.wikia.nocookie.net/pixar/images/d/d0/Pixarlogo.jpg/revision/latest?cb=20100712043022';
+const STARWARS_IMG = 'https://www.hdwallpapers.in/download/star_wars_4k_hd-HD.jpg';
 
 const REALMS = [
     {
@@ -11,7 +12,7 @@ const REALMS = [
         title: 'Pixar',
         subtitle: 'Worlds of Wonder',
         description: 'Adventure awaits in vibrant worlds where imagination has no limits.',
-        image: pixarImg,
+        image: PIXAR_IMG,
         gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
         accent: '#fbbf24',
         textAccent: '#38bdf8',
@@ -33,7 +34,7 @@ const REALMS = [
         title: 'Star Wars',
         subtitle: 'A Galaxy Far Away',
         description: 'Master the Force and explore the farthest reaches of the galaxy.',
-        image: starwarsImg,
+        image: STARWARS_IMG,
         gradient: 'linear-gradient(135deg, #3b82f6, #1e3a5f)',
         accent: '#38bdf8',
         textAccent: '#fbbf24',
