@@ -1,12 +1,21 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import princessesImg from '../../assets/realms/princesses.png';
-import starwarsImg from '../../assets/realms/starwars.png';
-import pixarImg from '../../assets/realms/pixar.png';
-import marvelImg from '../../assets/realms/marvel.png';
+import starwarsImg from '/starwars.png';
+import pixarImg from '/pixar.jpg';
 import './RealmSelection.css';
 
 const REALMS = [
+    {
+        id: 'pixar',
+        title: 'Pixar',
+        subtitle: 'Worlds of Wonder',
+        description: 'Adventure awaits in vibrant worlds where imagination has no limits.',
+        image: pixarImg,
+        gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
+        accent: '#fbbf24',
+        tag: '🎬 Animated',
+    },
     {
         id: 'princesses',
         title: 'Princesses',
@@ -26,26 +35,6 @@ const REALMS = [
         gradient: 'linear-gradient(135deg, #3b82f6, #1e3a5f)',
         accent: '#38bdf8',
         tag: '⚔️ Epic',
-    },
-    {
-        id: 'pixar',
-        title: 'Pixar',
-        subtitle: 'Worlds of Wonder',
-        description: 'Adventure awaits in vibrant worlds where imagination has no limits.',
-        image: pixarImg,
-        gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
-        accent: '#fbbf24',
-        tag: '🎬 Animated',
-    },
-    {
-        id: 'marvel',
-        title: 'Marvel',
-        subtitle: 'Heroic Universe',
-        description: 'Assemble with legendary heroes and face the mightiest villains.',
-        image: marvelImg,
-        gradient: 'linear-gradient(135deg, #dc2626, #f59e0b)',
-        accent: '#ef4444',
-        tag: '🦸 Heroes',
     },
 ];
 
