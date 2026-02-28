@@ -1,0 +1,392 @@
+/* ============================================
+   Disney StoryWorld — Animation System
+   ============================================ */
+
+/* --- Sparkle / Twinkle --- */
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes twinkle-delayed {
+
+    0%,
+    30% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    70%,
+    100% {
+        opacity: 0.1;
+    }
+}
+
+/* --- Floating --- */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    33% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+
+    66% {
+        transform: translateY(-8px) rotate(-1deg);
+    }
+}
+
+@keyframes float-horizontal {
+
+    0%,
+    100% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(15px);
+    }
+}
+
+/* --- Shooting Star --- */
+@keyframes shooting-star {
+    0% {
+        opacity: 0;
+        transform: translateX(0) translateY(0) rotate(-45deg);
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(400px) translateY(400px) rotate(-45deg);
+    }
+}
+
+/* --- Shimmer --- */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes shimmer-border {
+    0% {
+        border-color: rgba(124, 58, 237, 0.2);
+    }
+
+    50% {
+        border-color: rgba(167, 139, 250, 0.5);
+    }
+
+    100% {
+        border-color: rgba(124, 58, 237, 0.2);
+    }
+}
+
+/* --- Fade / Slide --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- Pulse / Glow --- */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgba(251, 191, 36, 0.3),
+            0 0 40px rgba(251, 191, 36, 0.1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 40px rgba(251, 191, 36, 0.5),
+            0 0 80px rgba(251, 191, 36, 0.2),
+            0 0 120px rgba(251, 191, 36, 0.1);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+@keyframes glow-breathe {
+
+    0%,
+    100% {
+        filter: brightness(1) drop-shadow(0 0 8px rgba(124, 58, 237, 0.3));
+    }
+
+    50% {
+        filter: brightness(1.2) drop-shadow(0 0 20px rgba(124, 58, 237, 0.6));
+    }
+}
+
+/* --- Rotate --- */
+@keyframes rotate-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Particle drift --- */
+@keyframes drift-up {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) translateX(0) scale(0);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-20vh) translateX(50px) scale(0.5);
+    }
+}
+
+@keyframes drift-up-alt {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) translateX(0) scale(0);
+    }
+
+    10% {
+        opacity: 0.8;
+        transform: scale(0.8);
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-20vh) translateX(-40px) scale(0.3);
+    }
+}
+
+/* --- Castle reveal --- */
+@keyframes castle-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.9);
+        filter: blur(10px);
+    }
+
+    60% {
+        opacity: 0.8;
+        filter: blur(2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* --- Magic wand trail --- */
+@keyframes wand-trail {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+        opacity: 0;
+    }
+}
+
+/* --- Aurora wave --- */
+@keyframes aurora-wave {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* --- Utility animation classes --- */
+.animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-twinkle {
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    animation: shimmer 3s linear infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-glow-breathe {
+    animation: glow-breathe 4s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-castle-reveal {
+    animation: castle-reveal 2s ease-out forwards;
+}

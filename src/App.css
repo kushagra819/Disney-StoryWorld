@@ -1,0 +1,15 @@
+/* ============================================
+   App-Level Styles
+   ============================================ */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  background: var(--ds-midnight);
+  overflow-x: hidden;
+}
+
+/* Smooth scroll container */
+.app>section {
+  position: relative;
+}

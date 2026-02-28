@@ -1,0 +1,32 @@
+/* ============================================
+   MagicCursor — Fairy Wand Sparkle Trail
+   ============================================ */
+
+.magic-cursor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: var(--z-cursor, 9999);
+}
+
+/* Hide default cursor on desktop when magic cursor is active */
+@media (hover: hover) and (pointer: fine) {
+    body:has(.magic-cursor-canvas) {
+        cursor: none;
+    }
+
+    body:has(.magic-cursor-canvas) a,
+    body:has(.magic-cursor-canvas) button {
+        cursor: none;
+    }
+}
+
+/* Disable on touch devices entirely */
+@media (hover: none) {
+    .magic-cursor-canvas {
+        display: none;
+    }
+}

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
+  <defs>
+    <linearGradient id="castleGlow" x1="600" y1="600" x2="600" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a0533" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="#2d1b69" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground -->
+  <path d="M0 580 Q300 540 600 560 Q900 540 1200 580 L1200 600 L0 600Z" fill="#0a0118"/>
+  <!-- Castle Base -->
+  <rect x="440" y="320" width="320" height="280" fill="#0f0525" rx="4"/>
+  <!-- Castle Gate -->
+  <path d="M560 600 L560 470 Q600 440 640 470 L640 600Z" fill="#1a0a35"/>
+  <!-- Gate Detail -->
+  <rect x="575" y="500" width="50" height="100" fill="#0a0118" rx="2"/>
+  <!-- Left Tower -->
+  <rect x="410" y="240" width="70" height="360" fill="#0f0525"/>
+  <polygon points="410,240 445,140 480,240" fill="#12062a"/>
+  <circle cx="445" cy="170" r="6" fill="#fbbf24" opacity="0.8"/>
+  <!-- Right Tower -->
+  <rect x="720" y="240" width="70" height="360" fill="#0f0525"/>
+  <polygon points="720,240 755,140 790,240" fill="#12062a"/>
+  <circle cx="755" cy="170" r="6" fill="#fbbf24" opacity="0.8"/>
+  <!-- Center Tower (Tallest) -->
+  <rect x="540" y="180" width="120" height="140" fill="#12062a"/>
+  <polygon points="540,180 600,60 660,180" fill="#150830"/>
+  <circle cx="600" cy="100" r="8" fill="#fbbf24" opacity="0.9"/>
+  <!-- Flag on center tower -->
+  <line x1="600" y1="60" x2="600" y2="20" stroke="#fbbf24" stroke-width="2"/>
+  <polygon points="600,20 630,30 600,40" fill="#fbbf24" opacity="0.8"/>
+  <!-- Small towers -->
+  <rect x="490" y="260" width="40" height="60" fill="#12062a"/>
+  <polygon points="490,260 510,210 530,260" fill="#150830"/>
+  <circle cx="510" cy="230" r="4" fill="#fbbf24" opacity="0.7"/>
+  <rect x="670" y="260" width="40" height="60" fill="#12062a"/>
+  <polygon points="670,260 690,210 710,260" fill="#150830"/>
+  <circle cx="690" cy="230" r="4" fill="#fbbf24" opacity="0.7"/>
+  <!-- Windows -->
+  <rect x="470" y="350" width="20" height="30" rx="10" fill="#7c3aed" opacity="0.4"/>
+  <rect x="470" y="420" width="20" height="30" rx="10" fill="#7c3aed" opacity="0.3"/>
+  <rect x="710" y="350" width="20" height="30" rx="10" fill="#7c3aed" opacity="0.4"/>
+  <rect x="710" y="420" width="20" height="30" rx="10" fill="#7c3aed" opacity="0.3"/>
+  <rect x="560" y="230" width="16" height="24" rx="8" fill="#a78bfa" opacity="0.5"/>
+  <rect x="624" y="230" width="16" height="24" rx="8" fill="#a78bfa" opacity="0.5"/>
+  <!-- Castle walls extending -->
+  <rect x="300" y="450" width="140" height="150" fill="#0a0118"/>
+  <rect x="760" y="450" width="140" height="150" fill="#0a0118"/>
+  <!-- Wall battlements left -->
+  <rect x="300" y="440" width="25" height="20" fill="#0a0118"/>
+  <rect x="340" y="440" width="25" height="20" fill="#0a0118"/>
+  <rect x="380" y="440" width="25" height="20" fill="#0a0118"/>
+  <!-- Wall battlements right -->
+  <rect x="775" y="440" width="25" height="20" fill="#0a0118"/>
+  <rect x="815" y="440" width="25" height="20" fill="#0a0118"/>
+  <rect x="855" y="440" width="25" height="20" fill="#0a0118"/>
+  <!-- Distant towers left -->
+  <rect x="220" y="400" width="40" height="200" fill="#08011a"/>
+  <polygon points="220,400 240,340 260,400" fill="#0a0220"/>
+  <!-- Distant towers right -->
+  <rect x="940" y="400" width="40" height="200" fill="#08011a"/>
+  <polygon points="940,400 960,340 980,400" fill="#0a0220"/>
+  <!-- Glow overlay -->
+  <rect x="0" y="0" width="1200" height="600" fill="url(#castleGlow)"/>
+</svg>
