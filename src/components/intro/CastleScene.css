@@ -1,0 +1,15 @@
+/* ============================================
+   CastleScene — 3D WebGL Scene Container
+   ============================================ */
+
+.castle-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.castle-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
