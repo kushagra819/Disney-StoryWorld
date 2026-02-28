@@ -1,18 +1,20 @@
-import { useState } from 'react';
 import { MagicCursor } from './components/ui/MagicCursor';
+import { Header } from './components/layout/Header';
 import { MagicalIntro } from './components/intro/MagicalIntro';
+import { RealmSelection } from './components/navigation/RealmSelection';
+import { AIStoryGenerator } from './components/features/AIStoryGenerator';
 
 function App() {
   return (
     <>
       <MagicCursor />
+      <Header />
       <main>
         <MagicalIntro />
 
         {/* Placeholder for Person A's Realm Selection */}
-        <section className="h-screen flex items-center justify-center bg-slate-900 border-t border-purple-500/20">
-          <h2 className="text-3xl text-purple-300">Realm Selection Coming Soon</h2>
-        </section>
+        <RealmSelection />
+        <AIStoryGenerator />
       </main>
     </>
   );

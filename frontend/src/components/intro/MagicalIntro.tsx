@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
 
 export const MagicalIntro = () => {
