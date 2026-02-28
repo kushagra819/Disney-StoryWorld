@@ -3,7 +3,8 @@ import MagicCursor from './components/ui/MagicCursor'
 import Header from './components/layout/Header'
 import HomePage from './pages/HomePage'
 import StoriesPage from './pages/StoriesPage'
-import ParksAndExperiencePage from './pages/ParksAndExperiencePage'
+import ParksPage from './pages/ParksPage'
+import ExperiencePage from './pages/ExperiencePage'
 import './App.css'
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/stories" element={<StoriesPage />} />
-          <Route path="/parks" element={<ParksAndExperiencePage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/parks" element={<ParksPage />} />
         </Routes>
       </div>
     </BrowserRouter>

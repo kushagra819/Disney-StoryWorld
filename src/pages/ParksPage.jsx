@@ -107,126 +107,6 @@ function Sparkles({ count = 25 }) {
     );
 }
 
-/* ─── Magic Kingdom Detail ──────────────────────────────────── */
-function MagicKingdomDetail() {
-    const iframeRef = useRef(null);
-    const inView = useInView(iframeRef, { once: true, margin: '-80px' });
-    const [showIframe, setShowIframe] = useState(false);
-
-    useEffect(() => {
-        if (inView) setShowIframe(true);
-    }, [inView]);
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
-            style={{ padding: '4rem 2rem', background: 'linear-gradient(180deg, #0a0118 0%, #1a0533 100%)' }}
-        >
-            <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
-                    {/* Left — description */}
-                    <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-                        <p style={{ color: '#a78bfa', fontFamily: 'var(--font-script)', fontSize: '1.2rem', marginBottom: '0.5rem' }}>
-                            Featured Park
-                        </p>
-                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '1rem' }}>
-                            Magic Kingdom
-                        </h2>
-                        <p style={{ color: 'rgba(248,248,255,0.7)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-                            The most-visited theme park on Earth, Magic Kingdom opened in 1971 as Walt Disney World's flagship experience.
-                            Centred around the iconic Cinderella Castle, it is a living fairy tale spanning six enchanted lands.
-                        </p>
-                        <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                            {[
-                                'Home to Cinderella Castle — the enduring symbol of Disney magic worldwide',
-                                'Six themed lands: Fantasyland, Tomorrowland, Adventureland and more',
-                                'Nightly fireworks spectacular above the glittering castle spires',
-                            ].map((point) => (
-                                <li key={point} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <Check size={16} color="#a78bfa" style={{ marginTop: 4, flexShrink: 0 }} />
-                                    <span style={{ fontSize: '0.95rem', color: 'rgba(248,248,255,0.8)' }}>{point}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </motion.div>
-
-                    {/* Right — 3D embed */}
-                    <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-                        <p style={{
-                            fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em',
-                            textTransform: 'uppercase', color: '#a78bfa', marginBottom: '0.75rem'
-                        }}>
-                            ◈ Explore in 3D
-                        </p>
-
-                        <div
-                            ref={iframeRef}
-                            style={{
-                                position: 'relative',
-                                width: '100%',
-                                aspectRatio: '16/9',
-                                borderRadius: 'var(--radius-lg)',
-                                overflow: 'hidden',
-                                boxShadow: '0 0 0 1px rgba(167,139,250,0.3), 0 0 50px rgba(167,139,250,0.1)',
-                            }}
-                        >
-                            {!showIframe ? (
-                                <div style={{
-                                    position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
-                                    alignItems: 'center', justifyContent: 'center',
-                                    background: 'linear-gradient(135deg, #7c3aed33, #a78bfa22)',
-                                    backdropFilter: 'blur(20px)',
-                                }}>
-                                    <motion.div
-                                        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 1, 0.5] }}
-                                        transition={{ duration: 2.5, repeat: Infinity }}
-                                        style={{ fontSize: '3rem', marginBottom: '1rem' }}
-                                    >
-                                        🏰
-                                    </motion.div>
-                                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem' }}>Loading 3D Experience…</p>
-                                </div>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
-                                    style={{ position: 'absolute', inset: 0 }}
-                                >
-                                    <iframe
-                                        title="Disney Cinderella Castle (Joseph St.Arnault)"
-                                        frameBorder="0"
-                                        allowFullScreen
-                                        allow="autoplay; fullscreen; xr-spatial-tracking"
-                                        src="https://sketchfab.com/models/24a4c7a325bc43b8ba3ce8a7e821dfea/embed?autostart=0&ui_theme=dark&preload=1"
-                                        style={{ width: '100%', height: '100%', border: 'none' }}
-                                    />
-                                </motion.div>
-                            )}
-                        </div>
-
-                        <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', textAlign: 'center' }}>
-                            <a
-                                href="https://sketchfab.com/3d-models/disney-cinderella-castle-joseph-starnault-24a4c7a325bc43b8ba3ce8a7e821dfea"
-                                target="_blank" rel="nofollow noreferrer"
-                                style={{ color: '#1CAAD9', fontWeight: 700 }}
-                            >
-                                Disney Cinderella Castle
-                            </a>{' '}by{' '}
-                            <a href="https://sketchfab.com/triosstudents" target="_blank" rel="nofollow noreferrer"
-                                style={{ color: '#1CAAD9', fontWeight: 700 }}
-                            >
-                                triosstudents
-                            </a>{' '}on Sketchfab
-                        </p>
-                    </motion.div>
-                </div>
-            </div>
-        </motion.div>
-    );
-}
-
 /* ─── Section 3: Hollywood Detail ───────────────────────────── */
 function HollywoodDetail() {
     const iframeRef = useRef(null);
@@ -346,6 +226,218 @@ function HollywoodDetail() {
     );
 }
 
+/* ─── Epcot Detail ───────────────────────────── */
+function EpcotDetail() {
+    const iframeRef = useRef(null);
+    const inView = useInView(iframeRef, { once: true, margin: '-80px' });
+    const [showIframe, setShowIframe] = useState(false);
+
+    useEffect(() => {
+        if (inView) setShowIframe(true);
+    }, [inView]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6 }}
+            style={{ padding: '4rem 2rem', background: 'linear-gradient(180deg, #0a0118 0%, #1a0533 100%)' }}
+        >
+            <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+
+                    <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+                        <p style={{ color: '#38bdf8', fontFamily: 'var(--font-script)', fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+                            Featured Park
+                        </p>
+                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '1rem' }}>
+                            Epcot
+                        </h2>
+                        <p style={{ color: 'rgba(248,248,255,0.7)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+                            A celebration of human achievement, international culture, and technological innovation. Epcot allows guests to travel the world and explore the wonders of the future all in one place.
+                        </p>
+                        <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            {[
+                                'Iconic Spaceship Earth geosphere serving as the park\'s centerpiece',
+                                'World Showcase featuring pavilions from 11 different countries',
+                                'Thrilling new experiences like Guardians of the Galaxy: Cosmic Rewind',
+                            ].map((point) => (
+                                <li key={point} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                    <Check size={16} color="#38bdf8" style={{ marginTop: 4, flexShrink: 0 }} />
+                                    <span style={{ fontSize: '0.95rem', color: 'rgba(248,248,255,0.8)' }}>{point}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
+                        <p style={{
+                            fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em',
+                            textTransform: 'uppercase', color: '#38bdf8', marginBottom: '0.75rem'
+                        }}>
+                            ◈ Explore in 3D
+                        </p>
+
+                        <div
+                            ref={iframeRef}
+                            style={{
+                                position: 'relative',
+                                width: '100%',
+                                aspectRatio: '16/9',
+                                borderRadius: 'var(--radius-lg)',
+                                overflow: 'hidden',
+                                boxShadow: '0 0 0 1px rgba(56,189,248,0.2), 0 0 40px rgba(56,189,248,0.08)',
+                            }}
+                        >
+                            {!showIframe ? (
+                                <div style={{
+                                    position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
+                                    alignItems: 'center', justifyContent: 'center',
+                                    background: 'linear-gradient(135deg, #0284c733, #38bdf833)',
+                                    backdropFilter: 'blur(20px)',
+                                }}>
+                                    <motion.div
+                                        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                        style={{ fontSize: '3rem', marginBottom: '1rem' }}
+                                    >
+                                        🌍
+                                    </motion.div>
+                                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem' }}>Loading 3D Experience…</p>
+                                </div>
+                            ) : (
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
+                                    style={{ position: 'absolute', inset: 0 }}
+                                    className="sketchfab-embed-wrapper"
+                                >
+                                    <iframe
+                                        title="Epcot Futureworld - Disney World Theme Park - VR"
+                                        frameBorder="0"
+                                        allowFullScreen
+                                        allow="autoplay; fullscreen; xr-spatial-tracking"
+                                        src="https://sketchfab.com/models/39025bfd4c6e48daaa3c3544473870b4/embed?autostart=0&ui_theme=dark&preload=1"
+                                        style={{ width: '100%', height: '100%', border: 'none' }}
+                                    />
+                                </motion.div>
+                            )}
+                        </div>
+                        <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', textAlign: 'center' }}>
+                            <a href="https://sketchfab.com/3d-models/epcot-futureworld-disney-world-theme-park-vr-39025bfd4c6e48daaa3c3544473870b4" target="_blank" rel="nofollow noreferrer" style={{ color: '#1CAAD9', fontWeight: 700 }}> Epcot Futureworld </a> by <a href="https://sketchfab.com/LoneDeveloper" target="_blank" rel="nofollow noreferrer" style={{ color: '#1CAAD9', fontWeight: 700 }}> LoneDeveloper </a> on Sketchfab
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
+
+/* ─── Animal Kingdom Detail ───────────────────────────── */
+function AnimalKingdomDetail() {
+    const iframeRef = useRef(null);
+    const inView = useInView(iframeRef, { once: true, margin: '-80px' });
+    const [showIframe, setShowIframe] = useState(false);
+
+    useEffect(() => {
+        if (inView) setShowIframe(true);
+    }, [inView]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6 }}
+            style={{ padding: '4rem 2rem', background: 'linear-gradient(180deg, #0a0118 0%, #1a0533 100%)' }}
+        >
+            <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+
+                    <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+                        <p style={{ color: '#22c55e', fontFamily: 'var(--font-script)', fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+                            Featured Park
+                        </p>
+                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '1rem' }}>
+                            Animal Kingdom
+                        </h2>
+                        <p style={{ color: 'rgba(248,248,255,0.7)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+                            Encounter exotic animals and exciting adventures at Disney's Animal Kingdom park, one of the largest animal theme parks in the world.
+                        </p>
+                        <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            {[
+                                'Awe-inspiring Tree of Life towering 145 feet over the park',
+                                'Expedition Everest: An exhilarating high-speed train ride through the Himalayas',
+                                'Kilimanjaro Safaris: An open-air vehicle tour through a lush African savanna',
+                            ].map((point) => (
+                                <li key={point} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                    <Check size={16} color="#22c55e" style={{ marginTop: 4, flexShrink: 0 }} />
+                                    <span style={{ fontSize: '0.95rem', color: 'rgba(248,248,255,0.8)' }}>{point}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
+                        <p style={{
+                            fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em',
+                            textTransform: 'uppercase', color: '#22c55e', marginBottom: '0.75rem'
+                        }}>
+                            ◈ Explore in 3D
+                        </p>
+
+                        <div
+                            ref={iframeRef}
+                            style={{
+                                position: 'relative',
+                                width: '100%',
+                                aspectRatio: '16/9',
+                                borderRadius: 'var(--radius-lg)',
+                                overflow: 'hidden',
+                                boxShadow: '0 0 0 1px rgba(34,197,94,0.2), 0 0 40px rgba(34,197,94,0.08)',
+                            }}
+                        >
+                            {!showIframe ? (
+                                <div style={{
+                                    position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
+                                    alignItems: 'center', justifyContent: 'center',
+                                    background: 'linear-gradient(135deg, #15803d33, #22c55e33)',
+                                    backdropFilter: 'blur(20px)',
+                                }}>
+                                    <motion.div
+                                        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                        style={{ fontSize: '3rem', marginBottom: '1rem' }}
+                                    >
+                                        🌳
+                                    </motion.div>
+                                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem' }}>Loading 3D Experience…</p>
+                                </div>
+                            ) : (
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
+                                    style={{ position: 'absolute', inset: 0 }}
+                                    className="sketchfab-embed-wrapper"
+                                >
+                                    <iframe
+                                        title="Singapore Zoo"
+                                        frameBorder="0"
+                                        allowFullScreen
+                                        allow="autoplay; fullscreen; xr-spatial-tracking"
+                                        src="https://sketchfab.com/models/7cf34b58d72d4c8db4eb3abf39aa3d60/embed?autostart=0&ui_theme=dark&preload=1"
+                                        style={{ width: '100%', height: '100%', border: 'none' }}
+                                    />
+                                </motion.div>
+                            )}
+                        </div>
+                        <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', textAlign: 'center' }}>
+                            <a href="https://sketchfab.com/3d-models/singapore-zoo-7cf34b58d72d4c8db4eb3abf39aa3d60" target="_blank" rel="nofollow noreferrer" style={{ color: '#1CAAD9', fontWeight: 700 }}> Singapore Zoo </a> by <a href="https://sketchfab.com/patrick.young" target="_blank" rel="nofollow noreferrer" style={{ color: '#1CAAD9', fontWeight: 700 }}> patrick.young </a> on Sketchfab
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
 /* ─── Main Page ──────────────────────────────────────────────── */
 export default function ParksPage() {
     const [selectedPark, setSelectedPark] = useState(null);
@@ -530,13 +622,44 @@ export default function ParksPage() {
                     {selectedPark === 'hollywood' && (
                         <motion.div key="hollywood-detail">
                             <HollywoodDetail />
+                        </motion.div>
+                    )}
+                    {selectedPark === 'magic' && (
+                        <motion.div key="magic-detail">
+                            <MagicKingdomDetail />
+                        </motion.div>
+                    )}
 
+                    {selectedPark === 'epcot' && (
+                        <motion.div key="epcot-detail">
+                            <EpcotDetail />
+                        </motion.div>
+                    )}
+
+                    {selectedPark === 'animal' && (
+                        <motion.div key="animal-detail">
+                            <AnimalKingdomDetail />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* ── Shared Content: Ride Highlights & Planner ── */}
+                <AnimatePresence>
+                    {selectedPark && (
+                        <motion.div
+                            key="shared-sections"
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 40 }}
+                            transition={{ duration: 0.6 }}
+                            style={{ position: 'relative', zIndex: 10 }}
+                        >
                             {/* ── Section 4: Ride Highlights ── */}
                             <section style={{ padding: '5rem 2rem', background: 'var(--ds-deep-purple)' }}>
                                 <div style={{ maxWidth: 1100, margin: '0 auto' }}>
                                     <div className="section__header">
                                         <p className="section__subtitle">Feel the Rush</p>
-                                        <h2 className="section__title">Top Rides</h2>
+                                        <h2 className="section__title">Top Experiences</h2>
                                     </div>
 
                                     <div style={{
@@ -671,7 +794,7 @@ export default function ParksPage() {
 
                                     {/* Result card */}
                                     <motion.div
-                                        key={`${plannerTime}-${plannerExp}-${plannerEnergy}`}
+                                        key={`${selectedPark}-${plannerTime}-${plannerExp}-${plannerEnergy}`}
                                         initial={{ opacity: 0, scale: 0.96 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 0.4 }}
@@ -684,10 +807,13 @@ export default function ParksPage() {
                                         }}
                                     >
                                         <h3 className="glow-gold" style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', marginBottom: '1rem' }}>
-                                            ✨ Your Ideal Hollywood Studios Adventure Includes…
+                                            ✨ Your Ideal {PARKS.find(p => p.id === selectedPark)?.name} Adventure Includes…
                                         </h3>
                                         <p style={{ color: 'rgba(248,248,255,0.8)', lineHeight: 1.8 }}>
-                                            {(PLANNER_RESULTS[plannerTime]?.[plannerExp]) || `A ${plannerEnergy.toLowerCase()} ${plannerTime.toLowerCase()} of ${plannerExp.toLowerCase()} experiences across Hollywood Studios.`}
+                                            {selectedPark === 'hollywood'
+                                                ? (PLANNER_RESULTS[plannerTime]?.[plannerExp] || `A ${plannerEnergy.toLowerCase()} ${plannerTime.toLowerCase()} of ${plannerExp.toLowerCase()} experiences across ${PARKS.find(p => p.id === selectedPark)?.name}.`)
+                                                : `A ${plannerEnergy.toLowerCase()} ${plannerTime.toLowerCase()} of ${plannerExp.toLowerCase()} experiences across ${PARKS.find(p => p.id === selectedPark)?.name}.`
+                                            }
                                         </p>
                                         <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                                             {[plannerTime, plannerExp, plannerEnergy].map(tag => (
@@ -703,46 +829,6 @@ export default function ParksPage() {
                                     </motion.div>
                                 </div>
                             </section>
-                        </motion.div>
-                    )}
-
-                    {/* Magic Kingdom — fully built */}
-                    {selectedPark === 'magic' && (
-                        <motion.div key="magic-detail">
-                            <MagicKingdomDetail />
-                        </motion.div>
-                    )}
-
-                    {/* Placeholder for Epcot & Animal Kingdom */}
-                    {selectedPark && selectedPark !== 'hollywood' && selectedPark !== 'magic' && (
-                        <motion.div
-                            key="placeholder-detail"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.5 }}
-                            style={{
-                                textAlign: 'center', padding: '5rem 2rem',
-                                background: 'linear-gradient(180deg, #0a0118, #1a0533)',
-                            }}
-                        >
-                            <div style={{ fontSize: '5rem', marginBottom: '1.5rem' }}>
-                                {PARKS.find(p => p.id === selectedPark)?.emoji}
-                            </div>
-                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', marginBottom: '1rem' }}>
-                                {PARKS.find(p => p.id === selectedPark)?.name}
-                            </h2>
-                            <p style={{ color: 'rgba(248,248,255,0.5)', fontSize: '1.1rem', maxWidth: 500, margin: '0 auto 2rem' }}>
-                                Full immersive experience coming soon. Explore Hollywood Studios or Magic Kingdom above!
-                            </p>
-                            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                                <button className="btn-magic btn-magic--ghost" onClick={() => handleParkClick('hollywood')}>
-                                    🎬 Hollywood Studios
-                                </button>
-                                <button className="btn-magic btn-magic--ghost" onClick={() => handleParkClick('magic')}>
-                                    🏰 Magic Kingdom
-                                </button>
-                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
