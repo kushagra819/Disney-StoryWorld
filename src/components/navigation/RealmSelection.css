@@ -1,0 +1,205 @@
+/* ============================================
+   RealmSelection — Portal Cards
+   ============================================ */
+
+.realm-selection {
+    position: relative;
+    background: var(--ds-midnight, #0a0118);
+    padding: 6rem 2rem;
+    overflow: hidden;
+}
+
+/* Background glow */
+.realm-selection__bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse,
+            rgba(124, 58, 237, 0.08) 0%,
+            rgba(56, 189, 248, 0.04) 40%,
+            transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- Grid --- */
+.realm-selection__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Card --- */
+.realm-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(26, 5, 51, 0.5);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    cursor: pointer;
+    transition: box-shadow 0.4s ease;
+}
+
+.realm-card:hover {
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 40px var(--accent, rgba(124, 58, 237, 0.2));
+    border-color: var(--accent, rgba(124, 58, 237, 0.3));
+}
+
+/* --- Image --- */
+.realm-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.realm-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.realm-card:hover .realm-card__image {
+    transform: scale(1.08);
+}
+
+.realm-card__image-overlay {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: overlay;
+    transition: opacity 0.4s ease;
+}
+
+.realm-card:hover .realm-card__image-overlay {
+    opacity: 0.5 !important;
+}
+
+/* Tag badge */
+.realm-card__tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    background: rgba(10, 1, 24, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: rgba(248, 248, 255, 0.9);
+    z-index: 2;
+}
+
+/* --- Content --- */
+.realm-card__content {
+    padding: 1.25rem;
+    position: relative;
+    z-index: 2;
+}
+
+.realm-card__title {
+    font-family: var(--font-display, 'Cinzel', serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ds-white, #fff);
+    margin-bottom: 0.15rem;
+}
+
+.realm-card__subtitle {
+    font-family: var(--font-script, 'Dancing Script', cursive);
+    font-size: 0.9rem;
+    color: var(--accent, #a78bfa);
+    margin-bottom: 0.5rem;
+}
+
+.realm-card__desc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(248, 248, 255, 0.5);
+    margin-bottom: 0.75rem;
+}
+
+/* --- Hover reveal action --- */
+.realm-card__action {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+}
+
+.realm-card:hover .realm-card__action {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.realm-card__explore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-display, 'Cinzel', serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--accent, #fbbf24);
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--accent, rgba(251, 191, 36, 0.3));
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.realm-card:hover .realm-card__explore {
+    background: var(--accent, rgba(251, 191, 36, 0.1));
+    box-shadow: 0 0 15px var(--accent, rgba(251, 191, 36, 0.15));
+}
+
+/* --- Glow ring on hover --- */
+.realm-card__glow {
+    position: absolute;
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 60%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.realm-card:hover .realm-card__glow {
+    opacity: 1;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .realm-selection__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .realm-selection {
+        padding: 4rem 1rem;
+    }
+
+    .realm-selection__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 400px;
+    }
+
+    .realm-card__image-wrapper {
+        aspect-ratio: 16 / 10;
+    }
+}
